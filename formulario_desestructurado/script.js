@@ -14,13 +14,13 @@ document
     const fecha = document.getElementById("fecha").value;
     const hora = document.getElementById("hora").value;
 
-    // 1. Validaciones básicas
+    //** 1. Validaciones básicas
     if (!nombre || !correo || !telefono || intereses.length === 0 || !horario) {
       alert("Por favor, completa todos los campos obligatorios.");
       return;
     }
 
-    // 2. Validacion de coherencia Horario vs Hora.
+    //**  2. Validacion de coherencia Horario vs Hora.
     if (horario.value === "mañana") {
       if (hora >= "12:00") {
         alert(
@@ -44,11 +44,30 @@ document
       }
     }
 
-    // 3. Si pasa todas las validaciones
+    //** 3. Validación de fechas
+    const fechaInput = document.getElementById("fecha");
+
+    // Fecha de hoy
+    const hoy = new Date();
+
+    // Formateamos a YYYY-MM-DD
+    //Usamos split('T')[0] porque toISOString() devuelve "2023-10-25T14:30..."
+    const fechaFormateada = hoy.toISOString().split("T")[0];
+
+    //Establecemos el minimo permitido en el calendario
+    fechaInput.min = fechaFormateada;
+
+    if (fecha < hoy) {
+      alert("La fecha no puede ser anterior al día de hoy.");
+      event.preventDefault(); //Detenemos el envio
+      return;
+    }
+
+    // Si pasa todas las validaciones
     console.log("Datos del registro:", {
       nombre,
       correo,
-      horario: horarioValue,
+      horario,
       hora,
     });
 
