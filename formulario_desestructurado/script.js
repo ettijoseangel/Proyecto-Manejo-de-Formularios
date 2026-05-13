@@ -63,6 +63,12 @@ document
       return;
     }
 
+    //** 4. Validacion de Intereses
+    if (intereses.length === 0) {
+        alert("Por favor, selecciona al menos un interés.");
+        return;
+    }
+
     // Si pasa todas las validaciones
     console.log("Datos del registro:", {
       nombre,
